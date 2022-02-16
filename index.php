@@ -66,29 +66,38 @@
             let pet = "";
 
             if(feels=="fluffy" && likes=="petted" && eats=="carrots"){
-              pet = rabbit;
+              pet = "rabbit";
+            }
+
+            if(feels=="scaley" && likes=="ridden" && eats=="pets"){
+              pet = "velociraptor";
             }
             //alert(feels);
 
             //where we'll store all data to show
             var output = '';
 
+            output += `<p> Congratualtions! you have a new pet ${pet}!<p>`
             output += `<p>Your pet feels ${feels}.</p>`;
             output += `<p>Your pet likes to be ${likes}.</p>`;
             output += `<p>Your pet likes to eat ${eats}.</p>`;
 
-            $.get('includes/get_pet.php', {critter:pet});
-            .done(function(data){
-              $('#output').html(data + output);
-            });
 
-            .fail(function(xhr, status, error) {
-            //Ajax request failed.
-            var errorMessage = xhr.status + ': ' + xhr.statusText
-            alert('Error - ' + errorMessage);
+            $.get( "include/get_pet.php", {"critter:pet" } )
+            .done(function( data ) {
+              //alert( "Data Loaded: " + data );
+               $('#output').html(data + output);
+            })
+             .fail(function(xhr, status, error) {
+               //Ajax request failed.
+               var errorMessage = xhr.status + ': ' + xhr.statusText
+               alert('Error - ' + errorMessage);
            })
 
-            alert
+            ;
+
+          
+
             //lets output info about the pet to the page
         
         });
