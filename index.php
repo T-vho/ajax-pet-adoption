@@ -20,7 +20,7 @@
 
    <div id="pet_feels">
        <h3>Feels</h3>
-       <p>Please choose how you would like your pet to feel!</p>
+       <p>Please choose how you would like your pet to feel:</p>
        <input type="radio" name="feels" value="fluffy" required="required">fluffy <br />
        <input type="radio" name="feels" value="scaly">scaly <br />
    </div>
@@ -44,25 +44,53 @@
 <script>
     $("document").ready(function(){
         
-      //hide like and eats     
-      $('pet_likes').hide();
-      $('pet_eats').hide();
+        //hide likes and eats
+        $('#pet_likes').hide();
+        $('#pet_eats').hide();
 
-      //on click of feels, like is shown
-      $('pet_feels').click(function(){
-        $('pet_likes').slideDown(200):
-      };
-      
+        //on click of feels, likes is shown
+         $('#pet_feels').click(function(){
+           $('#pet_likes').slideDown(200);
+         });
 
+        //on click of likes, eats is shown
+         $('#pet_likes').click(function(){
+           $('#pet_eats').slideDown(200);
+         });
+        
         $('#myForm').submit(function(e){
             e.preventDefault();//no need to submit as you'll be doing AJAX on this page
             let feels = $("input[name=feels]:checked").val();
             let likes = $("input[name=likes]:checked").val();
             let eats = $("input[name=eats]:checked").val();
             let pet = "";
-            alert(feels);
 
+            if(feels=="fluffy" && likes=="petted" && eats=="carrots"){
+              pet = rabbit;
+            }
+            //alert(feels);
 
+            //where we'll store all data to show
+            var output = '';
+
+            output += `<p>Your pet feels ${feels}.</p>`;
+            output += `<p>Your pet likes to be ${likes}.</p>`;
+            output += `<p>Your pet likes to eat ${eats}.</p>`;
+
+            $.get('includes/get_pet.php', {critter:pet});
+            .done(function(data){
+              $('#output').html(data + output);
+            });
+
+            .fail(function(xhr, status, error) {
+            //Ajax request failed.
+            var errorMessage = xhr.status + ': ' + xhr.statusText
+            alert('Error - ' + errorMessage);
+           })
+
+            alert
+            //lets output info about the pet to the page
+        
         });
 
     });
