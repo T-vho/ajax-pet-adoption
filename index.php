@@ -20,7 +20,7 @@
 
    <div id="pet_feels">
        <h3>Feels</h3>
-       <p>Please choose how you would like your pet to feel:</p>
+       <p>Please choose how you would like your pet to feel!</p>
        <input type="radio" name="feels" value="fluffy" required="required">fluffy <br />
        <input type="radio" name="feels" value="scaly">scaly <br />
    </div>
@@ -44,7 +44,16 @@
 <script>
     $("document").ready(function(){
         
-        
+      //hide like and eats     
+      $('pet_likes').hide();
+      $('pet_eats').hide();
+
+      //on click of feels, like is shown
+      $('pet_feels').click(function(){
+        $('pet_likes').slideDown(200):
+      };
+      
+
         $('#myForm').submit(function(e){
             e.preventDefault();//no need to submit as you'll be doing AJAX on this page
             let feels = $("input[name=feels]:checked").val();
