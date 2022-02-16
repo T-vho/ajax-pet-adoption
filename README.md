@@ -1,2 +1,3 @@
 # ajax-pet-adoption-starter
-A starting point for a jQuery AJAX project
+THis is my jquery AJAX pet Adoption Agency Project
+
